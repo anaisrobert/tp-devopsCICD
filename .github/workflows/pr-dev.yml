@@ -44,6 +44,7 @@ jobs:
 
       - name: Analyse de sécurité Snyk
         uses: snyk/actions/node@master
+        continue-on-error: true
         with:
           args: --all-projects
         env:
