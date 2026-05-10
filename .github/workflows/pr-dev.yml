@@ -13,45 +13,41 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
-      - name: Installer Node.js
+      - name:️ Installer Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # --- ÉTAPE FRONTEND ---
       - name: Frontend - Installation
         run: cd frontend && npm install
 
       - name: Frontend - Linting
         run: cd frontend && npm run lint --if-present
 
-      - name: Frontend - Audit
+      - name:️ Frontend - Audit
         run: cd frontend && npm audit || echo "Audit terminé avec des alertes"
 
       - name: Frontend - Tests
         run: cd frontend && npm test --if-present
 
-      # --- ÉTAPE BACKEND ---
       - name: Backend - Installation
         run: cd backend && npm install
 
       - name: Backend - Linting
         run: cd backend && npm run lint --if-present
 
-      - name: Backend - Audit
+      - name:️ Backend - Audit
         run: cd backend && npm audit || echo "Audit terminé avec des alertes"
 
       - name: Backend - Tests
         run: cd backend && npm test --if-present
 
-      # --- SÉCURITÉ SNYK ---
-      - name: Analyse de sécurité Snyk
+      - name:️ Analyse de sécurité Snyk
         uses: snyk/actions/node@master
-	with:
+        with:
           args: --all-projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # --- DOCKER ---
       - name: Tester la construction des images Docker
         run: docker compose build
