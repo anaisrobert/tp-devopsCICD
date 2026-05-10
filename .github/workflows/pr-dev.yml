@@ -13,7 +13,7 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v3
 
-      - name:️ Installer Node.js
+      - name: Installer Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -24,7 +24,7 @@ jobs:
       - name: Frontend - Linting
         run: cd frontend && npm run lint --if-present
 
-      - name:️ Frontend - Audit
+      - name: Frontend - Audit
         run: cd frontend && npm audit || echo "Audit terminé avec des alertes"
 
       - name: Frontend - Tests
@@ -36,13 +36,13 @@ jobs:
       - name: Backend - Linting
         run: cd backend && npm run lint --if-present
 
-      - name:️ Backend - Audit
+      - name: Backend - Audit
         run: cd backend && npm audit || echo "Audit terminé avec des alertes"
 
       - name: Backend - Tests
         run: cd backend && npm test --if-present
 
-      - name:️ Analyse de sécurité Snyk
+      - name: Analyse de sécurité Snyk
         uses: snyk/actions/node@master
         with:
           args: --all-projects
